@@ -29,7 +29,7 @@ function App() {
         Users
       </h1>
       {/*Display user data in a table with headers for id, name, and email*/}
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th></th>
@@ -40,8 +40,9 @@ function App() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr>
+            <tr key={user.id}>
               <td>
+                {/* Delay execution via arrow func */}
                 <button onClick={() => handleDelete(user.id)}>Delete</button>
               </td>
               <td>{user.id}</td>
@@ -51,8 +52,6 @@ function App() {
           ))}
         </tbody>
       </table>
-      <label htmlFor="firstName">First Name </label>
-      <input id="firstName" type="text"></input>
     </>
   );
 }
