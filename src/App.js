@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getUsers, deleteUser } from "./api/userApi";
 
 function App() {
-  const [users, setUsers] = useState([
-    //users now has a hook to update state, called setUsers. It is a "state variable"
-    { id: 1, name: "Cory", email: "c@h.com" },
-    { id: 2, name: "Megan", email: "m@c.com" },
-    { id: 3, name: "Tami", email: "t@tonga.com" }
-  ]);
+  const [users, setUsers] = useState([]);
+
+  // useEffect runs by default after every render
+  useEffect(() => {
+    // Using _users to avoid naming confusion with users above
+    getUsers().then(_users => setUsers(_users));
+  }, []); //empty dependency array means change default to "run just once"
 
   const h1Style = {
-    color: "red",
+    color: "blue",
     marginBottom: 20
   };
 
   function handleDelete(id) {
-    // Remove deleted element from users array
-    const newUsers = users.filter(user => user.id !== id);
-    setUsers(newUsers); //update state, so react knows to re-render
+    deleteUser(id).then(() => {
+      // Remove deleted element from users array
+      const newUsers = users.filter(user => user.id !== id);
+      setUsers(newUsers); //update state, so React knows to re-render
+    });
   }
 
   return (
@@ -29,7 +33,7 @@ function App() {
           <li>
             {/* Delay execution via arrow function */}
             <button onClick={() => handleDelete(user.id)}>Delete</button>
-            {user.name}
+            {" " + user.name}
           </li>
         ))}
       </ul>
