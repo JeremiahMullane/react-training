@@ -11,7 +11,7 @@ function App() {
   }, []); //empty dependency array means change default to "run just once"
 
   const h1Style = {
-    color: "blue",
+    color: "purple",
     marginBottom: 20
   };
 
@@ -28,18 +28,31 @@ function App() {
       <h1 className="header" style={h1Style}>
         Users
       </h1>
-      <ul>
-        {users.map(user => (
-          <li>
-            {/* Delay execution via arrow function */}
-            <button onClick={() => handleDelete(user.id)}>Delete</button>
-            {" " + user.name}
-          </li>
-        ))}
-      </ul>
+      {/*Display user data in a table with headers for id, name, and email*/}
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr>
+              <td>
+                <button onClick={() => handleDelete(user.id)}>Delete</button>
+              </td>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <label htmlFor="firstName">First Name </label>
       <input id="firstName" type="text"></input>
-      <p>My app.</p>
     </>
   );
 }
@@ -47,8 +60,11 @@ function App() {
 export default App;
 
 /*
-JSX Differences:
+JSX Differences from HTML:
     1.  class => className
     2.  for => htmlFor
     3.  objectStyles, camelCased rather than kabob-cased
+    4.  embed JS with braces {}
+    5.  comments must be blocks embeded in braces
+    6.  must be wrapped by empty tags <> ... </>
 */
