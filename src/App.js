@@ -8,14 +8,10 @@ import { Route } from "react-router-dom";
 function App() {
   return (
     <>
-      {/* Always display Nav */}
-      <Route path="/" component={Nav} />
-      {/* When URL is at root, load the Home component. */}
+      <Nav />
       <Route path="/" component={Home} exact />
-      {/* When URL is at root, load the Users component. */}
-      <Route path="/users" component={Users} exact />
-      {/* When URL is '/user', load the ManageUser component. */}
-      <Route path="/user" component={ManageUser} />
+      <Route path="/users" component={Users} />
+      <Route path="/manage-user" component={ManageUser} />
     </>
   );
 }
