@@ -50,6 +50,9 @@ function Users() {
               <td>
                 {/* Delay execution via arrow func */}
                 <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <Link to={"/manage-user/" + user.id}>
+                  <button>Edit 🖊 </button>
+                </Link>
               </td>
               <td>{user.id}</td>
               <td>{user.name}</td>
