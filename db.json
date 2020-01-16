@@ -14,16 +14,6 @@
       "id": 3,
       "name": "Tami",
       "email": "t@tonga.com"
-    },
-    {
-      "name": "Juan",
-      "email": "juan@hello.com",
-      "id": 4
-    },
-    {
-      "name": "y",
-      "email": "y@y.com",
-      "id": 5
     }
   ]
 }

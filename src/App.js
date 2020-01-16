@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUsers, deleteUser, addUser } from "./api/userApi";
+import { getUsers, deleteUser, addUser, editUser } from "./api/userApi";
 import Users from "./Users";
 import Home from "./Home";
 import Nav from "./Nav";
@@ -28,6 +28,11 @@ function App() {
     setUsers([...users, savedUser]);
   }
 
+  async function handleEdit(user) {
+    const savedUser = await editUser(user);
+    setUsers(users.map(_user => (_user.id === user.id ? savedUser : _user)));
+  }
+
   return (
     <>
       <Nav />
@@ -37,14 +42,19 @@ function App() {
         render={reactRouterProps => {
           return <Users users={users} deleteUser={handleDelete} />;
         }}
-      />{" "}
-      {/*pass props to User components */}
+      />
       <Route
         path="/manage-user/:userId?"
         render={reactRouterProps => {
-          return <ManageUser handleAdd={handleAdd} />;
+          return (
+            <ManageUser
+              users={users}
+              handleAdd={handleAdd}
+              handleEdit={handleEdit}
+            />
+          );
         }}
-      />{" "}
+      />
     </>
   );
 }
