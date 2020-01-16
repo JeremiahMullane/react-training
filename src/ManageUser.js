@@ -26,10 +26,11 @@ function ManageUser() {
       {/* using logical AND as an ad-hoc if statement. Only returns if 1st expression is true */}
       <h1>Add User</h1>
       <form onSubmit={handleSubmit}>
+        {/* We use the reusable component "Input" to make updatable JSX inputs within the form
+    You don't need reusable components to do this, but it makes the code nicer and easier to work with*/}
         <Input
           label="Name"
           id="name"
-          type="text"
           onChange={handleUserChange}
           value={user.name}
         />
