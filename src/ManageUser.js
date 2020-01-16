@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { addUser } from "./api/userApi";
-import { Redirect } from "react-router-dom";
+import { Redirect, useRouteMatch } from "react-router-dom";
 import Input from "./Input";
 
 function ManageUser() {
+  const match = useRouteMatch(); // info about the matching URL, can pull out the userId param from URL
+  const { userId } = match.params; // destructure id from match.params.userId
+
   const [user, setUser] = useState({
     name: "",
     email: ""
   });
   const [saveCompleted, setSaveCompleted] = useState(false);
+
+  useEffect(() => {
+    //call useEffect to run code upon page load
+    if (userId) {
+    }
+  });
 
   async function handleSubmit(event) {
     event.preventDefault(); // stop browswer from posting back after await

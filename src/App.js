@@ -11,7 +11,8 @@ function App() {
       <Nav />
       <Route path="/" component={Home} exact />
       <Route path="/users" component={Users} />
-      <Route path="/manage-user" component={ManageUser} />
+      <Route path="/manage-user/:userId?" component={ManageUser} />{" "}
+      {/*optional second segment in URL at '?' */}
     </>
   );
 }
