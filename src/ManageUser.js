@@ -4,6 +4,13 @@ import Input from "./Input";
 import PropTypes from "prop-types";
 
 function ManageUser({ users, handleAdd, handleEdit }) {
+  const h1Style = {
+    color: "blueviolet",
+    fontStyle: "oblique",
+    textShadow: "1px 1px black",
+    marginBottom: 20
+  };
+
   const match = useRouteMatch(); // info about the matching URL, can pull out the userId param from URL
   const { userId } = match.params; // destructure id from match.params.userId
 
@@ -27,7 +34,7 @@ function ManageUser({ users, handleAdd, handleEdit }) {
 
   async function handleAddUser(event) {
     event.preventDefault(); // stop browswer from posting back after await
-    await handleAdd(user);
+    userId ? await handleEdit(user) : await handleAdd(user);
     setSaveCompleted(true);
   }
 
@@ -35,7 +42,7 @@ function ManageUser({ users, handleAdd, handleEdit }) {
     <>
       {saveCompleted && <Redirect to="/users" />}{" "}
       {/* using logical AND as an ad-hoc if statement. Only returns if 1st expression is true */}
-      <h1>Add User</h1>
+      <h1 style={h1Style}>Add User</h1>
       <form onSubmit={handleAddUser}>
         {/* We use the reusable component "Input" to make updatable JSX inputs within the form
     You don't need reusable components to do this, but it makes the code nicer and easier to work with*/}
@@ -53,7 +60,13 @@ function ManageUser({ users, handleAdd, handleEdit }) {
           value={user.email}
         />
         <br />
-        <input type="submit" value="Add User" />
+        <input type="submit" value="Save" />{" "}
+        <input
+          type="button"
+          name="cancel"
+          value="Cancel"
+          onClick={() => setSaveCompleted(true)}
+        />
       </form>
     </>
   );

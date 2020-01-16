@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 function Users({ users, deleteUser }) {
   //destructure props argument
   const h1Style = {
-    color: "purple",
+    color: "blueviolet",
+    fontStyle: "oblique",
+    textShadow: "1px 1px black",
     marginBottom: 20
   };
 
