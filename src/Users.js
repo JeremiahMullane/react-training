@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { getUsers, deleteUser } from "./api/userApi";
 
-function Users() {
-  const [users, setUsers] = useState([]);
-
-  // useEffect runs by default after every render
-  useEffect(() => {
-    // Using _users to avoid naming confusion with users above
-    getUsers().then(_users => setUsers(_users));
-  }, []); //empty dependency array means change default to "run just once"
-
+function Users({ users, deleteUser }) {
+  //destructure props argument
   const h1Style = {
     color: "purple",
     marginBottom: 20
   };
-
-  function handleDelete(id) {
-    deleteUser(id).then(() => {
-      // Remove deleted element from users array
-      const newUsers = users.filter(user => user.id !== id);
-      setUsers(newUsers); //update state, so React knows to re-render
-    });
-  }
 
   return (
     <>
@@ -49,7 +34,7 @@ function Users() {
             <tr key={user.id}>
               <td>
                 {/* Delay execution via arrow func */}
-                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <button onClick={() => deleteUser(user.id)}>Delete</button>
                 <Link to={"/manage-user/" + user.id}>
                   {" "}
                   {/*includes optional id metadata in URL */}
@@ -66,6 +51,11 @@ function Users() {
     </>
   );
 }
+
+Users.propTypes = {
+  users: PropTypes.array.isRequired,
+  deleteUser: PropTypes.func.isRequired
+};
 
 export default Users;
 

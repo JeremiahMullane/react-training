@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { addUser } from "./api/userApi";
 import { Redirect, useRouteMatch } from "react-router-dom";
 import Input from "./Input";
 
-function ManageUser() {
+function ManageUser({ handleAdd }) {
   const match = useRouteMatch(); // info about the matching URL, can pull out the userId param from URL
   const { userId } = match.params; // destructure id from match.params.userId
 
@@ -16,17 +15,18 @@ function ManageUser() {
   useEffect(() => {
     //call useEffect to run code upon page load
     if (userId) {
+      // TODO: Get the userId out of props.users
     }
   });
 
-  async function handleSubmit(event) {
-    event.preventDefault(); // stop browswer from posting back after await
-    const savedUser = await addUser(user);
-    setSaveCompleted(true);
-  }
-
   function handleUserChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value }); // Brackets are "computed property syntax"- sets a property using a variable
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault(); // stop browswer from posting back after await
+    await handleAdd(user);
+    setSaveCompleted(true);
   }
 
   return (
