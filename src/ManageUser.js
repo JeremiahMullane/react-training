@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect, useRouteMatch } from "react-router-dom";
 import Input from "./Input";
 import PropTypes from "prop-types";
+import { Heading, Button } from "@athena/forge";
 
 function ManageUser({ users, handleAdd, handleEdit }) {
   const h1Style = {
@@ -42,7 +43,7 @@ function ManageUser({ users, handleAdd, handleEdit }) {
     <>
       {saveCompleted && <Redirect to="/users" />}{" "}
       {/* using logical AND as an ad-hoc if statement. Only returns if 1st expression is true */}
-      <h1 style={h1Style}>Add User</h1>
+      <Heading text="User Info" />
       <form onSubmit={handleAddUser}>
         {/* We use the reusable component "Input" to make updatable JSX inputs within the form
     You don't need reusable components to do this, but it makes the code nicer and easier to work with*/}

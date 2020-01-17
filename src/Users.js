@@ -1,26 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Heading, Button } from "@athena/forge";
 
 function Users({ users, deleteUser }) {
   //destructure props argument
-  const h1Style = {
-    color: "blueviolet",
-    fontStyle: "oblique",
-    textShadow: "1px 1px black",
-    marginBottom: 20
-  };
 
   return (
     <>
-      <h1 className="header" style={h1Style}>
-        Users
-      </h1>
-      <p>
-        <Link to="/manage-user">
-          <button>Add User</button>
-        </Link>
-      </p>
+      <Heading text="Users" />
+      <Link to="/manage-user">
+        <Button
+          text="Add User"
+          icon="Add"
+          className="fe_u_margin--bottom-medium"
+        ></Button>
+      </Link>
       {/*Display user data in a table with headers for id, name, and email*/}
       <table className="table">
         <thead>
@@ -36,16 +31,23 @@ function Users({ users, deleteUser }) {
             <tr key={user.id}>
               <td>
                 {/* Delay execution via arrow func */}
-                <button
+                <Button
+                  text="Delete"
+                  icon="Delete"
                   aria-label={`Delete user ${user.name}`}
                   onClick={() => deleteUser(user.id)}
-                >
-                  Delete
-                </button>
+                  className="fe_u_margin--xsmall"
+                  variant="secondary"
+                />
                 <Link to={"/manage-user/" + user.id}>
-                  {" "}
                   {/*includes optional id metadata in URL */}
-                  <button>Edit 🖊 </button>
+                  <Button
+                    text="Edit"
+                    icon="Edit"
+                    aria-label={`Edit user ${user.name}`}
+                    className="fe_u_margin--xsmall"
+                    variant="secondary"
+                  />
                 </Link>
               </td>
               <td>{user.id}</td>
