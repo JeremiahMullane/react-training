@@ -36,7 +36,12 @@ function Users({ users, deleteUser }) {
             <tr key={user.id}>
               <td>
                 {/* Delay execution via arrow func */}
-                <button onClick={() => deleteUser(user.id)}>Delete</button>
+                <button
+                  aria-label={`Delete user ${user.name}`}
+                  onClick={() => deleteUser(user.id)}
+                >
+                  Delete
+                </button>
                 <Link to={"/manage-user/" + user.id}>
                   {" "}
                   {/*includes optional id metadata in URL */}
